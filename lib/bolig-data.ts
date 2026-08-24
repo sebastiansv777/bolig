@@ -1,6 +1,7 @@
 export const property = {
-  address: 'Eksempelgata 12', city: '4020 Stavanger', price: '5 490 000 kr', rooms: 4, area: '92 m²', bedrooms: 3,
-  image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85',
+  address: 'Haugesundsgata 35', city: '4014 Stavanger', price: '5 490 000 kr', rooms: 4, area: '92 m²', bedrooms: 3,
+  image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=88',
+  imageCredit: 'Foto: Unsplash',
 }
 export const buyers = [
   { name: 'Sofie L.', status: 'Ny', time: '2 min siden', note: 'Ønsker privat visning' },
