@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+}
+
+:root {
+  color-scheme: light;
+  --background: #f7f7f5;
+  --foreground: #111111;
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+  --primary: #183d38;
+  --primary-foreground: #f7f7f5;
+  --secondary: #efefeb;
+  --secondary-foreground: #111111;
+  --muted: #efefeb;
+  --muted-foreground: #6b6b67;
+  --accent: #d9e6c5;
+  --accent-foreground: #183d38;
+  --border: #deded8;
+  --input: #deded8;
+  --ring: #183d38;
+}
+
+* { @apply border-border; }
+html { scroll-behavior: smooth; background: var(--background); }
+body { @apply bg-background text-foreground font-sans; margin: 0; }
+button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+.eyebrow { @apply font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground; }
+.section-title { @apply text-balance text-[clamp(2.7rem,5vw,5rem)] font-semibold leading-[0.94] tracking-[-0.07em]; }
+::selection { background: #d9e6c5; color: #183d38; }
+input[type='range'] { height: 4px; }
+input[type='range']::-webkit-slider-thumb { height: 22px; width: 22px; appearance: none; border-radius: 9999px; background: #183d38; border: 4px solid #f7f7f5; box-shadow: 0 0 0 1px #183d38; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
