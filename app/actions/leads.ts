@@ -38,6 +38,17 @@ export async function createLead(formData: FormData) {
   revalidatePath('/app/buyers')
 }
 
+export async function requestViewing(formData: FormData) {
+  const name = String(formData.get('name') || '').trim()
+  const email = String(formData.get('email') || '').trim().toLowerCase()
+  const slot = String(formData.get('slot') || '').trim()
+  const propertyAddress = String(formData.get('propertyAddress') || '').trim()
+  if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !slot || propertyAddress.length < 3) throw new Error('Ugyldig forespørsel')
+  await db.execute(sql`insert into public.leads (property_address, name, email, message) values (${propertyAddress}, ${name}, ${email}, ${`Visningsforespørsel: ${slot}`})`)
+  revalidatePath('/app')
+  revalidatePath('/app/buyers')
+}
+
 export async function getLeads(): Promise<Lead[]> {
   const result = await db.execute(sql`select id, property_address, name, email, phone, message, created_at from public.leads order by created_at desc limit 50`)
   return result.rows.map((row) => {
