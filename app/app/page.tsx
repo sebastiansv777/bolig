@@ -1,12 +1,17 @@
 import Link from 'next/link'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { ArrowRight, CheckCircle2, Clock3, Eye, Phone, TrendingUp } from 'lucide-react'
 import { AppShell, PageHeader } from '@/components/app-shell'
 import { property } from '@/lib/bolig-data'
 import { getLeadCount, getLeads } from '@/app/actions/leads'
+import { auth } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session?.user) redirect('/sign-in')
   const [leadCount, leads] = await Promise.all([getLeadCount(), getLeads()])
   const highPriority = leads.filter((lead) => lead.priority === 'Høy').length
   return <AppShell>
