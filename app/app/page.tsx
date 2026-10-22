@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { ArrowRight, CheckCircle2, Clock3, Eye, Phone, TrendingUp } from 'lucide-react'
 import { AppShell, PageHeader } from '@/components/app-shell'
+import { AssistantPanel } from '@/components/assistant-panel'
 import { property } from '@/lib/bolig-data'
 import { getLeadCount, getLeads } from '@/app/actions/leads'
 import { auth } from '@/lib/auth'
@@ -22,7 +23,8 @@ export default async function Dashboard() {
       <Stat icon={Clock3} label="Interessenter" value={String(leadCount)} note={leadCount ? `${highPriority} bør følges opp i dag` : 'Ingen forespørsler ennå'} />
       <Stat icon={CheckCircle2} label="Annonsekvalitet" value="94 / 100" note="Klar for publisering" />
     </div>
-    <section className="mt-8 rounded-3xl border border-border bg-background p-5 sm:p-8">
+    <div className="mt-8"><AssistantPanel /></div>
+    <section className="mt-6 rounded-3xl border border-border bg-background p-5 sm:p-8">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><div><p className="eyebrow">Prioritert innboks</p><h2 className="mt-2 text-2xl font-semibold tracking-tight">Dette bør du gjøre nå</h2></div><Link href="/app/buyers" className="text-sm font-medium text-primary">Åpne alle <ArrowRight className="ml-1 inline size-4" /></Link></div>
       {leads.length === 0 ? <div className="mt-6 rounded-2xl bg-secondary/60 p-5 text-sm text-muted-foreground">Når en kjøper tar kontakt, vurderer BOLIG signalene og foreslår neste handling her.</div> : <div className="mt-6 grid gap-3">{leads.slice(0, 4).map((lead) => <div key={lead.id} className="flex flex-col gap-4 rounded-2xl border border-border p-4 sm:flex-row sm:items-center sm:justify-between"><div className="min-w-0"><div className="flex items-center gap-2"><p className="font-medium">{lead.name}</p><span className={`rounded-full px-2 py-1 text-[11px] font-medium ${lead.priority === 'Høy' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground'}`}>{lead.priority} · {lead.score}/100</span></div><p className="mt-1 truncate text-sm text-muted-foreground">{lead.message || 'Ønsker informasjon om boligen'}</p><p className="mt-2 text-xs text-muted-foreground">{lead.createdAt} · {lead.nextAction}</p></div><a href={`tel:${lead.phone}`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-4 text-sm font-medium"><Phone className="mr-2 size-4" />Ring</a></div>)}</div>}
     </section>
